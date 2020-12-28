@@ -7,6 +7,10 @@ const backgroundImage = require('../assets/Background_Image.png');
 // Array of background colors
 const backgroundColorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
 
+import { StyleSheet, ImageBackground, View, Text, TextInput, Button } from 'react-native';
+
+const backgroundImage = require('../assets/Background_Image.png');
+
 export default class Start extends React.Component {
   constructor() {
     super();
@@ -139,7 +143,6 @@ export default class Start extends React.Component {
 /**
 *  styling
 */
-
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,

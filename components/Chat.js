@@ -67,7 +67,7 @@ export default class Chat extends React.Component {
 
     return (
       // Rendering chat layout
-      <View style={[styles.chatBackground, { backgroundColor }]}>
+      <View style={[ styles.chatBackground, { backgroundColor }]}>
         {this.state.image && (
           <Image
             source={{ uri: this.state.image.uri }}
@@ -101,3 +101,5 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
 });
+import { View, Text} from 'react-native';
+
