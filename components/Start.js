@@ -1,7 +1,11 @@
 import React from 'react';
-import { StyleSheet, ImageBackground, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ImageBackground, Platform, KeyboardAvoidingView,} from 'react-native';
 
+// Imports the background image
 const backgroundImage = require('../assets/Background_Image.png');
+
+// Array of background colors
+const backgroundColorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
 
 export default class Start extends React.Component {
   constructor() {
@@ -11,34 +15,130 @@ export default class Start extends React.Component {
     this.state = {
       name: '',
       // Setting a default background color in case the user doesn't select one
-      color: '',
+      backgroundColor: backgroundColorOptions[2],
     };
   }
 
   render() {
+    /**
+    * User can add their name to TextInput
+    * TouchableOpacity sets the Chat background color
+    */
+
     return (
-      // adding background image
+      // Setting background image to cover the whole screen
       <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 
-        <View style={{flex:1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text>Hello World!</Text>
-          <TextInput
-           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-           onChangeText={(name) => this.setState({name})}
-           value={this.state.name}
-           placeholder='Enter your name ...'
-         />
-          <Button
-            onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, color: this.state.color })}
-            title="Go to Chat"
-          />
-        </View>
+        {/* Wrapping children in a view for KeyboardAvoidingView */}
+        <View style={{ flex: 1 }}>
+          {/* App title */}
+          <Text style={styles.title}>
+            Hello World!
+          </Text>
 
+          {/* Login box */}
+          <View style={styles.loginBox}>
+            {/* Input field for username */}
+            <TextInput
+              style={styles.input}
+              // Updating username based on user's input
+              onChangeText={(name) => this.setState({ name })}
+              // Displaying user's input as it's being typed
+              value={this.state.name}
+              // Displaying what to input
+              placeholder="Enter your name.."
+            />
+
+            {/* Choose background color */}
+            <View style={styles.chooseColorBox}>
+              <Text style={styles.chooseColor}>
+                Choose background color:
+              </Text>
+            </View>
+
+            {/* Displaying background color options (circles) */}
+            <View style={styles.backgroundColorOptions}>
+
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="More options"
+                accessibilityHint="Let’s you choose a background color."
+                accessibilityRole="button"
+                // Changing the background color - position: 0 from the array defined above
+                onPress={() => this.setState({ backgroundColor: backgroundColorOptions[0] })}
+                // Displaying the color (circle) itself
+                style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[0] }]}
+              />
+
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="More options"
+                accessibilityHint="Let’s you choose a background color."
+                accessibilityRole="button"
+                // Changing the background color - position: 1 from the array defined above
+                onPress={() => this.setState({ backgroundColor: backgroundColorOptions[1] })}
+                // Displaying the color (circle) itself
+                style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[1] }]}
+              />
+
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="More options"
+                accessibilityHint="Let’s you choose a background color."
+                accessibilityRole="button"
+                // Changing the background color - position: 2 from the array defined above
+                onPress={() => this.setState({ backgroundColor: backgroundColorOptions[2] })}
+                // Displaying the color (circle) itself
+                style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[2] }]}
+              />
+
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="More options"
+                accessibilityHint="Let’s you choose a background color."
+                accessibilityRole="button"
+                // Changing the background color - position: 3 from the array defined above
+                onPress={() => this.setState({ backgroundColor: backgroundColorOptions[3] })}
+                // Displaying the color (circle) itself
+                style={[styles.colorSelector, { backgroundColor: backgroundColorOptions[3] }]}
+              />
+            </View>
+
+            { /* Chatting button */}
+            <View style={styles.startButton}>
+              <TouchableOpacity
+                accessible={true}
+                accessibilityLabel="Chat Button"
+                accessibilityHint="Let’s you start the chat."
+                accessibilityRole="button"
+                // Navigates to Chat view when the user taps on it
+                onPress={() => this.props.navigation.navigate('Chat', {
+                  // Updates the username as per user's input
+                  name: this.state.name,
+                  // Updates the background color as per user's choice (circle)
+                  backgroundColor: this.state.backgroundColor,
+                })}
+              >
+                {/* Text on the button */}
+                <Text style={styles.buttonText}>
+                  Start chat
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+
+          {/* If the device OS is Android, adjust height when the keyboard pops up */}
+          {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
+        </View>
       </ImageBackground>
-    )
+    );
   }
 }
 
+/**
+*  styling
+*/
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -121,4 +221,3 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-
