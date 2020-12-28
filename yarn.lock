@@ -4757,10 +4757,14 @@
     "asap" "~2.0.6"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "prop-types@*", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.7.x":
 =======
 "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
 >>>>>>> first commit
+=======
+"prop-types@*", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.7.x":
+>>>>>>> Chat Screen added
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -5849,10 +5853,14 @@
   "version" "1.0.1"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "uuid@^3.3.2", "uuid@^3.4.0", "uuid@3.4.0":
 =======
 "uuid@^3.3.2", "uuid@^3.4.0":
 >>>>>>> first commit
+=======
+"uuid@^3.3.2", "uuid@^3.4.0", "uuid@3.4.0":
+>>>>>>> Chat Screen added
   "integrity" "sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A=="
   "resolved" "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz"
   "version" "3.4.0"

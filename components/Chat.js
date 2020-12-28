@@ -90,9 +90,8 @@ export default class Chat extends React.Component {
   }
 }
 
-/**
-* styling
-*/
+
+// styling
 
 const styles = StyleSheet.create({
   chatBackground: {
@@ -101,5 +100,3 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
   },
 });
-import { View, Text} from 'react-native';
-
