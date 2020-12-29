@@ -91,6 +91,7 @@ async deleteMessages() {
     console.log(error.message);
   }
 }
+asfas
 
 
 componentDidMount() {
