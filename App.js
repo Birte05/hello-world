@@ -10,6 +10,52 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// import image function
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+
+// import communications features
+import CustomActions from './components/CustomActions';
+
+
+// build the buttons to take image or choose pic from library
+constructor() {
+  super();
+  state = {
+    image: null,
+  }
+};
+
+
+<View style={{flex: 1, justifyContent: 'center'}}>
+  <Button
+    title="Pick an image from the library"
+    onPress={this.pickImage}
+  />
+
+  <Button
+    title="Take a photo"
+    onPress={this.takePhoto}
+  />
+</View>
+
+pickImage = async () => {
+  const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+  if(status === 'granted') {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: 'Images',
+    }).catch(error => console.log(error));
+
+    if (!result.cancelled) {
+      this.setState({
+        image: result
+      });
+    }
+
+  }
+}
+
 
 // Create the navigator
 const Stack = createStackNavigator();
