@@ -110,6 +110,8 @@ onCollectionUpdate = (querySnapshot) => {
         _id: data.user._id,
         name: data.user.name,
       },
+      image: data.image || '',
+      location: data.location || null,
     });
   });
   this.setState({
@@ -187,7 +189,7 @@ renderInputToolbar(props) {
     );
   }
 }
-//checks wether message contains location data.
+//checks wether message contains location data and displays it
 renderCustomView (props) {
   const { currentMessage} = props;
   if (currentMessage.location) {
@@ -238,6 +240,7 @@ render() {
       )}
 
       <GiftedChat
+        renderCustomView={this.renderCustomView}
         renderActions={this.renderCustomActions}
         renderInputToolbar={this.renderInputToolbar}
         renderBubble={this.renderBubble}
