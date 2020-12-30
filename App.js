@@ -26,7 +26,6 @@ constructor() {
   }
 };
 
-
 <View style={{flex: 1, justifyContent: 'center'}}>
   <Button
     title="Pick an image from the library"
