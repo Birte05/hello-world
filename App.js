@@ -19,14 +19,14 @@ import CustomActions from './components/CustomActions';
 
 
 // build the buttons to take image or choose pic from library
-constructor() {
-  super();
-  state = {
-    image: null,
-  }
-};
+// constructor() {
+//   super();
+//   state = {
+//     image: null,
+//   }
+// };
 
-<View style={{flex: 1, justifyContent: 'center'}}>
+{/* <View style={{flex: 1, justifyContent: 'center'}}>
   <Button
     title="Pick an image from the library"
     onPress={this.pickImage}
@@ -36,24 +36,8 @@ constructor() {
     title="Take a photo"
     onPress={this.takePhoto}
   />
-</View>
+</View> */}
 
-pickImage = async () => {
-  const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-
-  if(status === 'granted') {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: 'Images',
-    }).catch(error => console.log(error));
-
-    if (!result.cancelled) {
-      this.setState({
-        image: result
-      });
-    }
-
-  }
-}
 
 
 // Create the navigator

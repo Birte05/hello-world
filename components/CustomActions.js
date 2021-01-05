@@ -1,8 +1,26 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import * as firebase from 'firebase';
+require('firebase/firestore');
+import NetInfo from '@react-native-community/netinfo';
+import * as Speech from 'expo-speech';
+
+import * as Location from 'expo-location';
+import MapView from 'react-native-maps';
+
 
 export default class CustomActions extends React.Component {
+  state = {
+    image: null,
+  }
+
+/**
+ * asks for permission and allows to pick image from library
+ * @async
+ * @function pickImage
+ */
 
 // pick image and ask for permission
   pickImage = async () => {
@@ -23,7 +41,14 @@ export default class CustomActions extends React.Component {
     console.log(error.message)
   }
 }
- // allows user to take a picture and send it to others
+
+/**
+ * allows user to take a pic and send it to others, stores pic
+ * @async
+ * @function takePhoto
+ * @returns {Promise<string>}
+ */
+
   takePhoto = async () => {
     try{
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
@@ -64,35 +89,12 @@ export default class CustomActions extends React.Component {
     console.log(error)
   }
 }
-// uploads images to firebase
-  uploadImage = async (uri) => {
-    try{
-    const blob = await new Promise((resolve, reject) =>{
-      const xhr = new XMLHttpRequest();
-      xhr.onload = function(){
-        resolve(xhr.response);
-      };
-      xhr.onerror = function(e) {
-        console.log(e);
-        reject(new TypeError('Network request failed'));
-      };
-      xhr.responseType = 'blob';
-      xhr.open('GET', uri, true);
-      xhr.send(null);
-    });
-    //this will make a unique file name for each image uploaded
-    let uriParts = uri.split('/')
-    let imageName = uriParts[uriParts.length - 1]
 
-    const ref = firebase.storage().ref().child(`${imageName}`)
-    const snapshot = await ref.put(blob);
-    blob.close();
-    const imageUrl = await snapshot.ref.getDownloadURL();
-    return imageUrl;
-  }catch(error){
-    console.log(error)
-  }
-}
+  /**
+   * When +-button is pressed user can choose next action
+   * @function onActionPress
+   * @returns {actionSheet}
+   */
 
   onActionsPress = () => {
     const options = ['Choose From Library', 'Take Picture', 'Send Location', 'Cancel'];
@@ -117,6 +119,14 @@ export default class CustomActions extends React.Component {
       },
     );
   };
+
+/**
+ * uploads pic as blob to cloud storage (firebase)
+ * @async
+ * @function uploadImage
+ * @param {string}
+ * @returns {string} url
+ */
 
 // turning a file into a blob
 uploadImage = async(uri) => {
@@ -167,6 +177,17 @@ uploadImageFetch = async(uri) => {
         <View style={[styles.wrapper, this.props.wrapperStyle]}>
           <Text style={[styles.iconText, this.props.iconTextStyle]}>+</Text>
         </View>
+        <View style={{flex: 1, justifyContent: 'center'}}>
+  <Button
+    title="Pick an image from the library"
+    onPress={this.pickImage}
+  />
+
+  <Button
+    title="Take a photo"
+    onPress={this.takePhoto}
+  />
+</View>
       </TouchableOpacity>
     );
   }

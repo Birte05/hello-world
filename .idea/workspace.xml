@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc2c1a37-63ae-48da-b43e-084e7983e570" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CustomActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/CustomActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Start.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Start.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +44,14 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="146" y="158" width="1200" height="637" key="AVDManager" timestamp="1609327857318">
+    <state x="14" y="132" width="1440" height="768" key="AVDManager" timestamp="1609871995497">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="146" y="158" width="1200" height="637" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1609327857318" />
+    <state x="14" y="132" width="1440" height="768" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1609871995497" />
+    <state x="327" y="184" key="run.anything.popup" timestamp="1609788333530">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="327" y="184" key="run.anything.popup/0.23.1440.877@0.23.1440.877" timestamp="1609788333530" />
+    <state x="436" y="217" key="run.anything.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1609782864097" />
   </component>
 </project>

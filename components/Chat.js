@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Platform, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, View, Text, Image, Platform, KeyboardAvoidingView} from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
@@ -7,11 +7,11 @@ import * as Speech from 'expo-speech';
 
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
-
-const firebase = require('firebase');
+import * as firebase from 'firebase';
 require('firebase/firestore');
 
 window.addEventListener = (x) => x;
+
 
 // Creating the Chat component
 export default class Chat extends React.Component {
@@ -38,13 +38,12 @@ constructor() {
     this.referenceMessages = firebase.firestore().collection('messages');
     }
 
-  return (
-    <View style={styles.container}>
-      <Button title="Press to hear some words" onPress={speak} />
-    </View>
-  );
+  // return (
+  //   <View style={styles.container}>
+  //     <Button title="Press to hear some words" onPress={speak} />
+  //   </View>
+  // );
 }
-
 
 componentDidMount() {
   NetInfo.fetch().then((state) => {
@@ -88,6 +87,12 @@ componentWillUnmount() {
   this.unsubscribe();
 }
 
+/**
+ * Sends messages
+ * @param {string} messages
+ * @returns {state} GiftedChat
+ */
+
 onSend(messages = []) {
   this.setState(previousState => ({
     messages: GiftedChat.append(previousState.messages, messages),
@@ -95,6 +100,18 @@ onSend(messages = []) {
     this.saveMessages();
   });
 }
+
+
+/**
+ * Updates the state of the message with the input of the text.
+ * @function onCollectionUpdate
+ * @param {string} _id - message id
+ * @param {string} text - text message
+ * @param {string} image - uri
+ * @param {number} location - geo coordinates
+ * @param {string} user - user data
+ * @param {date} createdAt - date/time of message creation
+ */
 
 onCollectionUpdate = (querySnapshot) => {
   const messages = [];
@@ -119,6 +136,19 @@ onCollectionUpdate = (querySnapshot) => {
   });
 };
 
+
+/**
+ * Pushes messages to Firestore database
+ * @function addMessages
+ * @param {string} _id - message id
+ * @param {string} text - message content
+ * @param {date} cratedAt - date and time of message
+ * @param {string} user - user data
+ * @param {string} image
+ * @param {number} location - geographical coordinates
+ * @param {boolean} sent
+*/
+
 addMessages = () => {
   const message = this.state.messages[0];
   this.referenceMessages.add({
@@ -132,6 +162,13 @@ addMessages = () => {
   });
 };
 
+/**
+* If user goes offline messages are stored in async storage
+* @async
+* @function getMessages
+* @returns messages
+*/
+
 async getMessages() {
   let messages = '';
   try {
@@ -144,6 +181,14 @@ async getMessages() {
   }
 };
 
+/**
+* saves messages to asyncStorage
+* @async
+* @function saveMessages
+* @await
+* @returns {Promise<AsyncStorage>}
+*/
+
 async saveMessages() {
   try {
     await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
@@ -151,6 +196,14 @@ async saveMessages() {
     console.log(error.message);
   }
 }
+
+/**
+ * deletes messages from asyncStorage. Currently not used but written incase it is needed
+ * @async
+ * @function deleteMessages
+ * @param {string} messages
+ * @return {AsyncStorage}
+ */
 
 async deleteMessages() {
   try {
@@ -179,6 +232,13 @@ renderBubble(props) {
   );
 }
 
+/**
+ * removes toolbar if not connected to internet
+ * @function renderInputToolbar
+ * @param {*} props
+ * @return {InputToolbar}
+ */
+
 renderInputToolbar(props) {
   if (this.state.isConnected == false) {
   } else {
@@ -189,7 +249,15 @@ renderInputToolbar(props) {
     );
   }
 }
-//checks wether message contains location data and displays it
+
+/**
+ * shows location if coordinates are available
+ * @function renderCustomView
+ * @param {*} props
+ * @returns {MapView}
+ */
+
+
 renderCustomView (props) {
   const { currentMessage} = props;
   if (currentMessage.location) {
@@ -211,6 +279,13 @@ renderCustomView (props) {
   return null;
 }
 
+/**
+ * Shows options to take photo, retrieve image from library, and share location options
+ * @function renderCustomActions
+ * @param {*} props
+ * @returns {CustomActions}
+ */
+
 renderCustomActions = (props) => {
   return <CustomActions {...props} />;
 };
@@ -218,7 +293,7 @@ renderCustomActions = (props) => {
 render() {
   // Defining variables from StartScreen
   let { user, backgroundColor } = this.props.route.params;
-
+  console.log(this.props.navigation)
   // Displaying username on the navbar in place of the title
   this.props.navigation.setOptions({ title: user });
   return (
@@ -230,8 +305,7 @@ render() {
           style={{ width: 200, height: 200 }}
         />
       )}
-
-      </Text>
+      <Text>Hello {this.props.navigation.state.params.name}</Text>
       {this.state.image && (
         <Image
           source={{ uri: this.state.image.uri }}
@@ -252,7 +326,8 @@ render() {
         }}
       />
       //If the device OS is Android, adjust height when the keyboard pops up
-      {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}      </View>
+      {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
+      </View>
   );
 }
 }
