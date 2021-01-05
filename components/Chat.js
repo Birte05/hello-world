@@ -305,7 +305,7 @@ render() {
           style={{ width: 200, height: 200 }}
         />
       )}
-      <Text>Hello {this.props.navigation.state.params.name}</Text>
+      <Text>Hello {this.props.route.params.name}</Text>
       {this.state.image && (
         <Image
           source={{ uri: this.state.image.uri }}
@@ -325,7 +325,7 @@ render() {
           _id: 1,
         }}
       />
-      //If the device OS is Android, adjust height when the keyboard pops up
+      {/* If the device OS is Android, adjust height when the keyboard pops up */}
       {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
       </View>
   );
