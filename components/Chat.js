@@ -86,8 +86,10 @@ componentDidMount() {
 }
 
 componentWillUnmount() {
-  this.authUnsubscribe();
-  this.unsubscribe();
+  if (this.state.isConnected) {
+    this.unsubscribe();
+    this.authUnsubscribe();
+  }
 }
 
 /**
