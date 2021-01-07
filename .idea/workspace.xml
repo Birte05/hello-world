@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc2c1a37-63ae-48da-b43e-084e7983e570" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,10 +38,11 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="0" y="315" width="1440" height="768" key="AVDManager" timestamp="1609878662885">
+    <state x="16" y="193" width="1440" height="768" key="AVDManager" timestamp="1610042930801">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="0" y="315" width="1440" height="768" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1609878662885" />
+    <state x="0" y="239" width="1440" height="768" key="AVDManager/0.23.1440.877/1440.-486.1920.1057@0.23.1440.877" timestamp="1610011122317" />
+    <state x="16" y="193" width="1440" height="768" key="AVDManager/0.23.1440.877@0.23.1440.877" timestamp="1610042930801" />
     <state x="327" y="184" key="run.anything.popup" timestamp="1609788333530">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

@@ -8,7 +8,9 @@ import * as Speech from 'expo-speech';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import * as firebase from 'firebase';
-require('firebase/firestore');
+
+//const firebase = require('firebase');
+//require('firebase/firestore');
 
 window.addEventListener = (x) => x;
 
@@ -18,13 +20,14 @@ export default class Chat extends React.Component {
 constructor() {
   super();
   this.state = {
-    messages: [],
+    messages: [], // 5.4. reference to "message" collection to save user messages in firestore
     user: {
       _id: '',
       name: '',
     },
   };
 
+  // Task 5.4.
   if (!firebase.apps.length) {
     firebase.initializeApp({
       apiKey: "AIzaSyDdwCp0uzuyxlmY9EoUtjia9qxSBKbf-HQ",
@@ -48,7 +51,7 @@ constructor() {
 componentDidMount() {
   NetInfo.fetch().then((state) => {
     if (state.isConnected) {
-      this.authUnsubscribe = firebase
+      this.authUnsubscribe = firebase  // 5.4. authenticate users
         .auth()
         .onAuthStateChanged(async (user) => {
           if (!user) {
@@ -149,6 +152,7 @@ onCollectionUpdate = (querySnapshot) => {
  * @param {boolean} sent
 */
 
+// 5.4. add messages
 addMessages = () => {
   const message = this.state.messages[0];
   this.referenceMessages.add({

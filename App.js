@@ -45,27 +45,27 @@ const Stack = createStackNavigator();
 
 export default class App extends React.Component {
 
- render() {
-   return (
-    <NavigationContainer>
-     <View style={{flex:1, justifyContent:'center'}}>
-     <Stack.Navigator
-        initialRouteName="SplashScreen"
-      >
-        <Stack.Screen
-          name="Start"
-          component={Start}
-        />
+  render() {
+    return (
+      <NavigationContainer>
+        <View style={{flex:1, justifyContent:'center'}}>
+          <Stack.Navigator
+            initialRouteName="SplashScreen"
+          >
+            <Stack.Screen
+              name="Start"
+              component={Start}
+            />
 
-        <Stack.Screen
-          name="Chat"
-          component={Chat}
-        />
+            <Stack.Screen
+              name="Chat"
+              component={Chat}
+            />
 
-      </Stack.Navigator>
+          </Stack.Navigator>
 
-      </View>
+        </View>
       </NavigationContainer>
-   );
- }
+    );
+  }
 }
