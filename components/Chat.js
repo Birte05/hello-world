@@ -8,36 +8,36 @@ import * as Speech from 'expo-speech';
 import * as Location from 'expo-location';
 import MapView from 'react-native-maps';
 import * as firebase from 'firebase';
-
-//const firebase = require('firebase');
-//require('firebase/firestore');
+import "firebase/firestore";
 
 window.addEventListener = (x) => x;
 
 
 // Creating the Chat component
 export default class Chat extends React.Component {
-constructor() {
-  super();
-  this.state = {
-    messages: [], // 5.4. reference to "message" collection to save user messages in firestore
-    user: {
-      _id: '',
-      name: '',
-    },
-  };
+  constructor() {
+    super();
+    this.state = {
+      messages: [], // 5.4. reference to "message" collection to save user messages in firestore
+      user: {
+        _id: '',
+        name: '',
+      },
+    };
 
   // Task 5.4.
+  const firebaseConfig = {
+    apiKey: "AIzaSyDdwCp0uzuyxlmY9EoUtjia9qxSBKbf-HQ",
+    authDomain: "chatapp-fa950.firebaseapp.com",
+    projectId: "chatapp-fa950",
+    storageBucket: "chatapp-fa950.appspot.com",
+    messagingSenderId: "831032587230",
+    appId: "1:831032587230:web:e2fca0cd051182c25ce34f",
+    measurementId: "G-5V25G8BF5S"
+  }
   if (!firebase.apps.length) {
-    firebase.initializeApp({
-      apiKey: "AIzaSyDdwCp0uzuyxlmY9EoUtjia9qxSBKbf-HQ",
-      authDomain: "chatapp-fa950.firebaseapp.com",
-      projectId: "chatapp-fa950",
-      storageBucket: "chatapp-fa950.appspot.com",
-      messagingSenderId: "831032587230",
-      appId: "1:831032587230:web:e2fca0cd051182c25ce34f",
-      measurementId: "G-5V25G8BF5S"
-    });
+    firebase.initializeApp(firebaseConfig);
+
     this.referenceMessages = firebase.firestore().collection('messages');
     }
 
@@ -46,7 +46,7 @@ constructor() {
   //     <Button title="Press to hear some words" onPress={speak} />
   //   </View>
   // );
-}
+};
 
 componentDidMount() {
   NetInfo.fetch().then((state) => {
@@ -119,7 +119,7 @@ onSend(messages = []) {
  */
 
 onCollectionUpdate = (querySnapshot) => {
-  const messages = [];
+  const messages = this.state.messages;
   // loop through documents
   querySnapshot.forEach((doc) => {
     // get data snapshot
