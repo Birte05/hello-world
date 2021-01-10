@@ -31,6 +31,8 @@ export default class Chat extends Component {
       location: null,
     };
 
+/**
+*/
     const firebaseConfig = {
       apiKey: "AIzaSyDdwCp0uzuyxlmY9EoUtjia9qxSBKbf-HQ",
       authDomain: "chatapp-fa950.firebaseapp.com",
@@ -50,6 +52,10 @@ export default class Chat extends Component {
       firebase.firestore().collection('messages');
   };
 
+
+/**
+ *
+ */
   componentDidMount() {
     let { name, backGround } = this.props.route.params;
 
@@ -123,12 +129,27 @@ export default class Chat extends Component {
     });
   }
 
+/**
+ *
+ */
+
   componentWillUnmount() {
     if (this.state.isConnected) {
       this.unsubscribe();
       this.authUnsubscribe();
     }
   }
+
+  /**
+   * Updates the state of the message with the new text
+   * @function onCollectionUpdate
+   * @param {string} _id
+   * @param {string} text - text message
+   * @param {date} createdAt - date/time of message creation
+   * @param {string} user
+   * @param {string} image - uri
+   * @param {number} location - geo coordinates
+   */
 
   onCollectionUpdate = (querySnapshot) => {
     const messages = [];
@@ -155,6 +176,9 @@ export default class Chat extends Component {
     }
   };
 
+/**
+ *
+ */
   // update messages from local storage
   getMessages = async () => {
     let messages = '';
@@ -168,6 +192,12 @@ export default class Chat extends Component {
     }
   };
 
+    /**
+    * saves messages to asyncStorage
+    * @async
+    * @function saveMessages
+    * @return {AsyncStorage>}
+    */
   // Save messages state to local storage as 'messages' key
   saveMessages = async () => {
     try {
@@ -193,7 +223,17 @@ export default class Chat extends Component {
     }
   }
 
-  // Messages added to Firestore from state
+/**
+     * Messages added to Firestore from state
+     * @function addMessage
+     * @param {number} _id
+     * @param {string} text
+     * @param {date} createdAt
+     * @param {string} user
+     * @param {image} image
+     * @param {number} location
+     */
+
   addMessages = () => {
     // Find the newest (ie first ) message of messages state
     const message = this.state.messages[0];
@@ -208,7 +248,13 @@ export default class Chat extends Component {
     });
   };
 
-  // Developer use - Clears Firestore, leaves placeholder to maintain collection
+    /**
+     * deletes messages from asyncStorage
+     * @async
+     * @function deleteMessages
+     * @param {referenceMessages}
+     */
+
   deleteMessagesFirestore = async () => {
     collectionPlaceholder =
     {
@@ -231,11 +277,14 @@ export default class Chat extends Component {
           this.referenceMessages.add(collectionPlaceholder);
         })
     } catch (error) {
-      console.log(error);
     }
   };
 
-  // Adds new messages
+  /** Adds new messages
+     * @function onSend
+     * @param {*} messages - message, formats {message/image/location}
+     * @returns {state} updates state with message
+     */
   onSend = (messages = []) => {
     this.setState(
       (previousState) => ({
@@ -267,7 +316,11 @@ export default class Chat extends Component {
     )
   }
 
-  // To render message toolbar only if user is online
+  /** Shows message toolbar only if user is online
+     * @function renderInputToolbar
+     * @param {*} props
+     * @returns {InputToolbar}
+     */
   renderInputToolbar = (props) => {
     if (props.isConnected == false) {
     } else {
@@ -282,6 +335,12 @@ export default class Chat extends Component {
   renderCustomActions = (props) => {
     return <CustomActions {...props} />;
   };
+
+/** Returns MapView if message contains location
+     * @function renderCustomView
+     * @param {*} props
+     * @returns {MapView}
+     */
 
   renderCustomView = (props) => {
     const { currentMessage } = props;
